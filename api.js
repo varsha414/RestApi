@@ -1,19 +1,20 @@
-var express = require('express');// you have to require package called express
-var app = express(); //create object
-var port = 7800; //define port num
-//var bodParser = require('body-parser');
-var mongo = require('mongodb'); // package
-var MongoClient = mongo.MongoClient // method in mongo package
+const express = require('express');// you have to require package called express
+const app = express(); //create object
+//var port = 7800; //define port num
+const port = process.env.PORT || 7800;
+const bodyParser = require('body-parser');
+const mongo = require('mongodb'); // package
+const MongoClient = mongo.MongoClient; // method in mongo package
 /*var mongourl = "mongodb://localhost:27017"; // url to mongodb with which connection is done */
-var mongourl = "mongodb://varsha:Varsha2000d@cluster1-shard-00-00.m95me.mongodb.net:27017,cluster1-shard-00-01.m95me.mongodb.net:27017,cluster1-shard-00-02.m95me.mongodb.net:27017/edurekainternship?ssl=true&replicaSet=atlas-p05ove-shard-0&authSource=admin&retryWrites=true&w=majority";
-var cors = require('cors'); // specify cors package 
+const mongourl = "mongodb://varsha:Varsha2000d@cluster1-shard-00-00.m95me.mongodb.net:27017,cluster1-shard-00-01.m95me.mongodb.net:27017,cluster1-shard-00-02.m95me.mongodb.net:27017/edurekainternship?ssl=true&replicaSet=atlas-p05ove-shard-0&authSource=admin&retryWrites=true&w=majority";
+const cors = require('cors'); // specify cors package 
 
-var db;// give database a name
+let db;// give database a name
 
 app.use(cors()); // use our cors package
 //app.use(express.json());
-//app.use(bodParser.urlencoded({extented:true}));// to encode or decode data (make it in readable format)
-//app.use(bodParser.json());
+app.use(bodyParser.urlencoded({extented:true}));// to encode or decode data (make it in readable format)
+app.use(bodyParser.json());
 
 
 app.get('/health',(req,res) => {
